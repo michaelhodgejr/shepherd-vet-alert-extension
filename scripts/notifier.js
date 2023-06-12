@@ -1,26 +1,22 @@
 // Every 10 seconds, check if alert_class exists on the page
-
-let hasAlert = false;
+let numofAlerts = 0;
 
 setInterval(function () {
-  var alertSelector = document.querySelector('.u-icon--circle-warning');
+  var alertCount = document.getElementsByClassName(
+    "u-icon--circle-warning"
+  ).length;
 
-  if (alertSelector) {
-    // Do not send a notification if we notified the user already
-    if (!hasAlert) {
-      document.title = "Shepherd Alert!"
-
-      // Send message to background.js to notify the user
-      chrome.runtime.sendMessage({message: "notification"});
-
-      // Set hasAlert to true so we don't send another notification
-      hasAlert = true;
-    }else {
-      // We've already notified the user of this alert so do nothing
-      document.title = "Shepherd";
-    }
-  }else{
-    // No alert found, reset the hasAlert variable
-    hasAlert = false;
+  // Set the title to indicate the number of alerts
+  if (alertCount > 0) {
+    document.title = `${alertCount} Alerts!`;
   }
-}, 10000);
+
+  // Only send a notification if the alert number for this interval is greater than the previous interval
+  if (alertCount > numofAlerts) {
+    // Send message to background.js to notify the user
+    chrome.runtime.sendMessage({ message: "notification" });
+  }
+
+  // Set the number of alerts to the current alert count
+  numofAlerts = alertCount;
+}, 1000);

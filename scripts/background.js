@@ -44,12 +44,6 @@ chrome.runtime.onMessage.addListener(
       });
 
       playSound();
-
-      // Play a ding to alert the user
-     // var audio = new Audio("ding.mp3");
-     // audio.play();
-
-
     }
 
   }
