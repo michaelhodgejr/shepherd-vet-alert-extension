@@ -1,0 +1,1 @@
+This is a simple chrome extension that monitors your Shepherd Vet tab for a new alert and notifies you when one comes in via a push notification. 
