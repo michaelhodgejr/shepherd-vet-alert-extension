@@ -2,8 +2,8 @@
 let numofAlerts = 0;
 
 setInterval(function () {
-  var alertCount = document.getElementsByClassName(
-    "u-icon--circle-warning"
+  var alertCount = document.querySelectorAll(
+    ".nav--primary__item .u-icon--circle-warning"
   ).length;
 
   // Set the title to indicate the number of alerts
